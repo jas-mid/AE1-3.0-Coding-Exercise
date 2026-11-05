@@ -64,6 +64,20 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            DropdownButton<String>(
+              value: _currencyOne,
+              items: _currenciesDollarNormalised.keys.map((String currency) {
+                return DropdownMenuItem<String>(
+                  value: currency,
+                  child: Text(currency),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _currencyOne = newValue!;
+                });
+              },
+            ),
             TextField(
               decoration: const InputDecoration(labelText: 'Input Amount'),
               onChanged: (value) {
