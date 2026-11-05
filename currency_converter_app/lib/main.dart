@@ -76,6 +76,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 setState(() {
                   _currencyOne = newValue!;
                 });
+                _convert(); // Automatically convert when the first currency changes
               },
             ),
             TextField(
@@ -84,6 +85,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 setState(() {
                   _amountOne = double.tryParse(value) ?? 0;
                 });
+                _convert(); // Automatically convert when the input amount changes
               },
             ),
             DropdownButton<String>(
@@ -97,10 +99,11 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               onChanged: (String? newValue) {
                 setState(() {
                   _currencyTwo = newValue!;
+                  _convert(); // Automatically convert when the second currency changes
                 });
               },
             ),
-            ElevatedButton(onPressed: _convert, child: const Text('Convert')),
+
             TextField(
               decoration: const InputDecoration(labelText: 'Converted Amount'),
               readOnly: true,

@@ -49,3 +49,7 @@ app.*.map.json
 
 #template files
 main_template.dart
+
+#temporary vs code files
+*.code-workspace
+.vscode/
