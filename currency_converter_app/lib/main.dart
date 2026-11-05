@@ -120,7 +120,9 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               decoration: const InputDecoration(labelText: 'Input Amount'),
               onChanged: (value) {
                 setState(() {
-                  _amountOne = double.tryParse(value) ?? 0;
+                  _amountOne = (double.tryParse(value) ?? 0)
+                      .clamp(0, double.infinity)
+                      .toDouble();
                 });
                 _convert(); // Automatically convert when the input amount changes
               },
@@ -170,7 +172,9 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               ),
               onChanged: (value) {
                 setState(() {
-                  _amountTwo = double.tryParse(value) ?? 0;
+                  _amountTwo = (double.tryParse(value) ?? 0)
+                      .clamp(0, double.infinity)
+                      .toDouble();
                 });
                 _reverseConvert(); // Automatically convert when the converted amount changes
               },
