@@ -44,4 +44,23 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       _amountOne *
       _currenciesDollarNormalised[_currencyTwo]! /
       _currenciesDollarNormalised[_currencyOne]!;
+
+  void _convert() {
+    setState(() {
+      _amountTwo = _convertedAmount;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.onPrimaryContainer,
+      fontWeight: FontWeight.bold,
+    );
+    return Scaffold(
+      appBar: AppBar(title: const Text('Currency Converter')),
+      body: Padding(padding: const EdgeInsets.all(16.0)),
+    );
+  }
 }
