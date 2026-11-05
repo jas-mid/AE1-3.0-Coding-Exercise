@@ -106,7 +106,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               },
             ),
             Text(
-              'Conversion Rate: 1 ${_currencyOne} = ${_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!} ${_currencyTwo}',
+              'Conversion Rate: 1 ${_currencyOne} = ${(_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!).toStringAsFixed(2)} ${_currencyTwo}',
               style: style,
             ),
             TextField(
