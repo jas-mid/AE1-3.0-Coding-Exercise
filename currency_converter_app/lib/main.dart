@@ -12,7 +12,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Currency Converter',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      theme: ThemeData(
+        colorScheme: .fromSeed(
+          seedColor: const Color.fromARGB(255, 31, 58, 95),
+        ),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 242, 243, 240),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 31, 58, 95),
+          foregroundColor: Colors.white,
+        ),
+      ),
       home: CurrencyConverterPage(),
     );
   }
@@ -52,6 +61,18 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   void _convert() {
     setState(() {
       _amountTwo = _convertedAmount;
+    });
+  }
+
+  // reverse conversion
+  double get _reverseConvertedAmount =>
+      _amountTwo *
+      _currenciesDollarNormalised[_currencyOne]! /
+      _currenciesDollarNormalised[_currencyTwo]!;
+
+  void _reverseConvert() {
+    setState(() {
+      _amountOne = _reverseConvertedAmount;
     });
   }
 
@@ -138,6 +159,12 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               controller: TextEditingController(
                 text: _amountTwo.toStringAsFixed(2),
               ),
+              onChanged: (value) {
+                setState(() {
+                  _amountTwo = double.tryParse(value) ?? 0;
+                });
+                _reverseConvert(); // Automatically convert when the converted amount changes
+              },
             ),
             SizedBox(height: 20),
             Row(
