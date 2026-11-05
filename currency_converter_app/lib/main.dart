@@ -126,7 +126,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
             ),
             SizedBox(height: 10),
             Text(
-              'Conversion Rate: 1 ${_currencyOne} = ${(_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!).toStringAsFixed(2)} ${_currencyTwo}',
+              'Conversion Rate: 1 $_currencyOne = ${(_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!).toStringAsFixed(2)} $_currencyTwo',
               style: style,
             ),
             TextField(
@@ -137,15 +137,29 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                String tempCurrency =
-                    _currencyTwo; // Placeholder for the first currency
-                _currencyTwo = _currencyOne; // Set the first currency to the second currency
-                _currencyOne = tempCurrency; // Set the second currency to the first currency
-                _convert();
-              },
-              child: const Text('Swap Currencies'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    String tempCurrency =
+                        _currencyTwo; // Placeholder for the first currency
+                    _currencyTwo = _currencyOne; // Set the first currency to the second currency
+                    _currencyOne = tempCurrency; // Set the second currency to the first currency
+                    _convert();
+                  },
+                  child: const Text('Swap Currencies'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    _currencyOne = "USD";
+                    _currencyTwo = "EUR";
+                    _amountOne = 0;
+                    _convert();
+                  },
+                  child: const Text('Reset'),
+                ),
+              ],
             ),
           ],
         ),
