@@ -100,6 +100,14 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 });
               },
             ),
+            ElevatedButton(onPressed: _convert, child: const Text('Convert')),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Converted Amount'),
+              readOnly: true,
+              controller: TextEditingController(
+                text: _amountTwo.toStringAsFixed(2),
+              ),
+            ),
           ],
         ),
       ),
