@@ -26,7 +26,7 @@ class CurrencyConverterPage extends StatefulWidget {
 }
 
 class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
-  // State variables
+  // Stating variables
   double _amountOne = 0;
   double _amountTwo = 0;
   String _currencyOne = "USD";
@@ -40,6 +40,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     "CAD": 1.4,
     "CNY": 6.67,
   };
+  //Controller to update the input box value on reset
+  final TextEditingController _inputController = TextEditingController();
 
   // methods
   double get _convertedAmount =>
@@ -91,6 +93,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               ],
             ),
             TextField(
+              controller: _inputController,
               decoration: const InputDecoration(labelText: 'Input Amount'),
               onChanged: (value) {
                 setState(() {
@@ -155,6 +158,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                     _currencyOne = "USD";
                     _currencyTwo = "EUR";
                     _amountOne = 0;
+                    _inputController.clear(); // Clear the input field
                     _convert();
                   },
                   child: const Text('Reset'),
