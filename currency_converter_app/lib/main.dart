@@ -60,7 +60,21 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     );
     return Scaffold(
       appBar: AppBar(title: const Text('Currency Converter')),
-      body: Padding(padding: const EdgeInsets.all(16.0)),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(labelText: 'Input Amount'),
+              onChanged: (value) {
+                setState(() {
+                  _amountOne = double.tryParse(value) ?? 0;
+                });
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
