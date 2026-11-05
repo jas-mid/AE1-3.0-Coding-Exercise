@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Currency Converter',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: .fromSeed(
           seedColor: const Color.fromARGB(255, 31, 58, 95),
@@ -86,7 +87,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Currency Converter')),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(34.0),
         child: Column(
           children: [
             Row(
@@ -96,6 +97,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 SizedBox(width: 10),
                 DropdownButton<String>(
                   value: _currencyOne,
+                  focusColor: Colors.transparent,
                   items: _currenciesDollarNormalised.keys.map((
                     String currency,
                   ) {
@@ -131,6 +133,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 SizedBox(width: 10),
                 DropdownButton<String>(
                   value: _currencyTwo,
+                  focusColor: Colors.transparent,
                   items: _currenciesDollarNormalised.keys.map((
                     String currency,
                   ) {
@@ -154,7 +157,13 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               style: style,
             ),
             TextField(
-              decoration: const InputDecoration(labelText: 'Converted Amount'),
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+              decoration: const InputDecoration(
+                labelText: 'Converted Amount:',
+                border: InputBorder.none,
+                floatingLabelAlignment: FloatingLabelAlignment.center,
+              ),
               readOnly: true,
               controller: TextEditingController(
                 text: _amountTwo.toStringAsFixed(2),
