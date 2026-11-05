@@ -86,6 +86,20 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 });
               },
             ),
+            DropdownButton<String>(
+              value: _currencyTwo,
+              items: _currenciesDollarNormalised.keys.map((String currency) {
+                return DropdownMenuItem<String>(
+                  value: currency,
+                  child: Text(currency),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _currencyTwo = newValue!;
+                });
+              },
+            ),
           ],
         ),
       ),
