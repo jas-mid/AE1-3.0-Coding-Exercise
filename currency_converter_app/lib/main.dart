@@ -105,7 +105,10 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 });
               },
             ),
-
+            Text(
+              'Conversion Rate: 1 ${_currencyOne} = ${_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!} ${_currencyTwo}',
+              style: style,
+            ),
             TextField(
               decoration: const InputDecoration(labelText: 'Converted Amount'),
               readOnly: true,
