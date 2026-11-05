@@ -37,6 +37,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
     "GBP": 0.74,
     "JPY": 158.47,
     "NGN": 1344.44,
+    "CAD": 1.4,
+    "CNY": 6.67,
   };
 
   // methods
@@ -110,6 +112,16 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               controller: TextEditingController(
                 text: _amountTwo.toStringAsFixed(2),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                String tempCurrency =
+                    _currencyTwo; // Placeholder for the first currency
+                _currencyTwo = _currencyOne; // Set the first currency to the second currency
+                _currencyOne = tempCurrency; // Set the second currency to the first currency
+                _convert();
+              },
+              child: const Text('Swap Currencies'),
             ),
           ],
         ),
