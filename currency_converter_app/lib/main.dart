@@ -31,7 +31,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   double _amountTwo = 0;
   String _currencyOne = "USD";
   String _currencyTwo = "EUR";
-  Map<String, double> _currenciesDollarNormalised = {
+  final Map<String, double> _currenciesDollarNormalised = {
     "USD": 1.0,
     "EUR": 0.89,
     "GBP": 0.74,
@@ -66,20 +66,29 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            DropdownButton<String>(
-              value: _currencyOne,
-              items: _currenciesDollarNormalised.keys.map((String currency) {
-                return DropdownMenuItem<String>(
-                  value: currency,
-                  child: Text(currency),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _currencyOne = newValue!;
-                });
-                _convert(); // Automatically convert when the first currency changes
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Convert from:'),
+                SizedBox(width: 10),
+                DropdownButton<String>(
+                  value: _currencyOne,
+                  items: _currenciesDollarNormalised.keys.map((
+                    String currency,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: currency,
+                      child: Text(currency),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _currencyOne = newValue!;
+                    });
+                    _convert(); // Automatically convert when the first currency changes
+                  },
+                ),
+              ],
             ),
             TextField(
               decoration: const InputDecoration(labelText: 'Input Amount'),
@@ -90,21 +99,32 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 _convert(); // Automatically convert when the input amount changes
               },
             ),
-            DropdownButton<String>(
-              value: _currencyTwo,
-              items: _currenciesDollarNormalised.keys.map((String currency) {
-                return DropdownMenuItem<String>(
-                  value: currency,
-                  child: Text(currency),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _currencyTwo = newValue!;
-                  _convert(); // Automatically convert when the second currency changes
-                });
-              },
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Convert to:'),
+                SizedBox(width: 10),
+                DropdownButton<String>(
+                  value: _currencyTwo,
+                  items: _currenciesDollarNormalised.keys.map((
+                    String currency,
+                  ) {
+                    return DropdownMenuItem<String>(
+                      value: currency,
+                      child: Text(currency),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _currencyTwo = newValue!;
+                      _convert(); // Automatically convert when the second currency changes
+                    });
+                  },
+                ),
+              ],
             ),
+            SizedBox(height: 10),
             Text(
               'Conversion Rate: 1 ${_currencyOne} = ${(_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!).toStringAsFixed(2)} ${_currencyTwo}',
               style: style,
@@ -116,6 +136,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 text: _amountTwo.toStringAsFixed(2),
               ),
             ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 String tempCurrency =
