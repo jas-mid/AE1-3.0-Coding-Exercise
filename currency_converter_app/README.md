@@ -27,6 +27,6 @@ flutter run
 
 ## AI Usage
 
-Google Search AI was used when trying to find syntax for specific feature, for example, syntax for the clamp(0, double.infinity) to prevent negative inputs showing an output.
+Google Search AI was used when trying to find syntax for specific features, for example, syntax for clamp(0, double.infinity) to prevent negative inputs showing an output.
 
 The VS Code extension Error Lens added comments within the code at the end of code blocks, describing their function for easy bug spotting and fixing.

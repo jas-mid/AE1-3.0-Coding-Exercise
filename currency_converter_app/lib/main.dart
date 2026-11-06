@@ -37,10 +37,13 @@ class CurrencyConverterPage extends StatefulWidget {
 
 class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   // Stating variables
+
+  // Initial values for the amounts and currencies
   double _amountOne = 0;
   double _amountTwo = 0;
   String _currencyOne = "USD";
   String _currencyTwo = "EUR";
+  // Normalised currency values to USD for conversion
   final Map<String, double> _currenciesDollarNormalised = {
     "USD": 1.0,
     "EUR": 0.89,
@@ -53,30 +56,22 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
   //Controller to update the input box value on reset
   final TextEditingController _inputController = TextEditingController();
 
-  // methods
+  // Methods
+
+  // Working out the output amount based on the input amount and currencies
   double get _convertedAmount =>
       _amountOne *
       _currenciesDollarNormalised[_currencyTwo]! /
       _currenciesDollarNormalised[_currencyOne]!;
 
+  // Converts the output variable to the calculated amount
   void _convert() {
     setState(() {
       _amountTwo = _convertedAmount;
     });
   }
 
-  // reverse conversion
-  double get _reverseConvertedAmount =>
-      _amountTwo *
-      _currenciesDollarNormalised[_currencyOne]! /
-      _currenciesDollarNormalised[_currencyTwo]!;
-
-  void _reverseConvert() {
-    setState(() {
-      _amountOne = _reverseConvertedAmount;
-    });
-  }
-
+  // Building the UI
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -85,16 +80,21 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
       fontWeight: FontWeight.bold,
     );
     return Scaffold(
+      // App bar with title
       appBar: AppBar(title: const Text('Currency Converter')),
       body: Padding(
         padding: const EdgeInsets.all(34.0),
+        // Start of page formatting
         child: Column(
           children: [
+            // Row for the first currency selection
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Text labelling selector box
                 Text('Convert from:'),
                 SizedBox(width: 10),
+                // Dropdown selector to choose currency
                 DropdownButton<String>(
                   value: _currencyOne,
                   focusColor: Colors.transparent,
@@ -115,6 +115,7 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                 ),
               ],
             ),
+            // Input for the amount to convert
             TextField(
               controller: _inputController,
               decoration: const InputDecoration(labelText: 'Input Amount'),
@@ -128,11 +129,14 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               },
             ),
             SizedBox(height: 20),
+            // Row for second currency select
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Text labelling selector box
                 Text('Convert to:'),
                 SizedBox(width: 10),
+                // Dropdown selector to choose output currency
                 DropdownButton<String>(
                   value: _currencyTwo,
                   focusColor: Colors.transparent,
@@ -154,10 +158,12 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               ],
             ),
             SizedBox(height: 10),
+            // Label displaying the conversion rate
             Text(
               'Conversion Rate: 1 $_currencyOne = ${(_currenciesDollarNormalised[_currencyTwo]! / _currenciesDollarNormalised[_currencyOne]!).toStringAsFixed(2)} $_currencyTwo',
               style: style,
             ),
+            // Output field displaying the converted amount
             TextField(
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
@@ -170,19 +176,13 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
               controller: TextEditingController(
                 text: _amountTwo.toStringAsFixed(2),
               ),
-              onChanged: (value) {
-                setState(() {
-                  _amountTwo = (double.tryParse(value) ?? 0)
-                      .clamp(0, double.infinity)
-                      .toDouble();
-                });
-                _reverseConvert(); // Automatically convert when the converted amount changes
-              },
             ),
             SizedBox(height: 20),
+            // Row containing the swap and reset buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // Swap currencies button
                 ElevatedButton(
                   onPressed: () {
                     String tempCurrency =
@@ -193,6 +193,8 @@ class _CurrencyConverterPageState extends State<CurrencyConverterPage> {
                   },
                   child: const Text('Swap Currencies'),
                 ),
+                // Reset button to reset the currencies and amounts to default values
+                SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {
                     _currencyOne = "USD";
