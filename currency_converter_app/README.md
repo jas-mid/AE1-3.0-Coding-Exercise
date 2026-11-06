@@ -1,17 +1,32 @@
-# currency_converter_app
+# currency_converter_app - LDSCI6206 Question 3.0
 
-A new Flutter project.
+A Flutter project built with Dart to convert currencies using fixed values.
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
+- Flutter SDK 3.0
+- Emulator or browser to run output in
 
-A few resources to get you started if this is your first Flutter project:
+## Installing dependencies
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```bash
+flutter pub get
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Running the App
+
+Select "Run" and then "Run Without Debugging" and select your output medium
+
+Or press ctrl + f5 and select your output medium
+
+or
+
+```bash
+flutter run
+```
+
+## AI Usage
+
+Google Search AI was used when trying to find syntax for specific feature, for example, syntax for the clamp(0, double.infinity) to prevent negative inputs showing an output.
+
+The VS Code extension Error Lens added comments within the code at the end of code blocks, describing their function for easy bug spotting and fixing.
